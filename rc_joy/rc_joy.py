@@ -47,7 +47,8 @@ class RcJoy:
 
     def __init__(self, port) -> None:
         self.ser = open_serial_port(port=port, baud_rate=115200)
-
+        self.init = 0
+        
     def Connected(self):
         if self.ser is None:
             return False
@@ -70,7 +71,11 @@ class RcJoy:
                             'steering': convert_to_float(values[4])}
                         return joystick
                     else:
-                        print("Received incorrect number of values.")
+                        if self.init < 10:
+                            print("Sync received values.")
+                            self.init += 1
+                        else:
+                            print("Received incorrect number of values.")
                         return None
                 except ValueError:
                     print("Error converting values to integers.")

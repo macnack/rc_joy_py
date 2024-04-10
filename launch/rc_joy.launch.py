@@ -35,6 +35,9 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             param_path
         ],
+        remappings=[
+            ('~/output/joy', '/joy')
+        ],
         output='screen',
         arguments=['--ros-args', '--log-level', 'info', '--enable-stdout-logs'],
         emulate_tty=True

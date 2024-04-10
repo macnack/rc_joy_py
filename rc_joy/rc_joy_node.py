@@ -40,7 +40,6 @@ class RcJoyNode(Node):
     def timer_callback(self):
         joystick = self.rc_joy.read()
         if joystick is not None:
-            self.get_logger().info(str(joystick))
             msg = Joy()
             msg.header.stamp = self.get_clock().now().to_msg()
             msg.axes = [joystick["throttle"], joystick["steering"],
