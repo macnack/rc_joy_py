@@ -43,12 +43,22 @@ def convert_to_button(value):
     return value > 0
 
 
+def convert_to_buttons(value):
+    # Convert to
+    if value < -int(32767 / 2):
+        return [True, False, False]
+    elif value > int(32767 / 2):
+        return [False, False, True]
+    else:
+        return [False, True, False]
+
+
 class RcJoy:
 
     def __init__(self, port) -> None:
         self.ser = open_serial_port(port=port, baud_rate=115200)
         self.init = 0
-        
+
     def Connected(self):
         if self.ser is None:
             return False
@@ -67,7 +77,7 @@ class RcJoy:
                             'throttle': convert_to_float(values[0]),
                             'button': convert_to_button(values[1]),
                             'left_gain': convert_to_one(values[2]),
-                            'right_gain': convert_to_one(values[3]),
+                            'trigger': convert_to_buttons(values[3]),
                             'steering': convert_to_float(values[4])}
                         return joystick
                     else:

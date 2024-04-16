@@ -43,8 +43,8 @@ class RcJoyNode(Node):
             msg = Joy()
             msg.header.stamp = self.get_clock().now().to_msg()
             msg.axes = [joystick["throttle"], joystick["steering"],
-                        joystick["left_gain"], joystick["right_gain"]]
-            msg.buttons = [joystick["button"]]
+                        joystick["left_gain"]]
+            msg.buttons = [joystick["button"]] + joystick["trigger"]
             self.publisher.publish(msg)
 
 
