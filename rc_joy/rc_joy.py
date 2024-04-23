@@ -74,11 +74,11 @@ class RcJoy:
 
                     if len(values) == 5:
                         joystick = {
-                            'throttle': convert_to_float(values[0]),
+                            'throttle': convert_to_float(values[4]),
                             'button': convert_to_button(values[1]),
                             'left_gain': convert_to_one(values[2]),
                             'trigger': convert_to_buttons(values[3]),
-                            'steering': convert_to_float(values[4])}
+                            'steering': convert_to_float(values[0])}
                         return joystick
                     else:
                         if self.init < 10:
